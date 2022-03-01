@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Użytkownicy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1> List Users</h1>
+        </div>
+        <div class="row">
+            <div class="col-Lg-3">
+                <a th:href="@{/users/new}" class="btn btn-primary btn-sm mb-3">Dodaj Czytelnika</a>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>E-mail</th>
+                    <th>Hasło</th>
+                    <th>Saldo</th>
+                    <th>Biblioteka</th>
+                    <th>Adres</th>
+                    <th>Rola</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "user : ${users}">
+                    <td th:text="${user.getFirstName()}"></td>
+                    <td th:text="${user.getLastName()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td th:text="${user.getPassword()}"></td>
+                    <td th:text="${user.getBalance()}"></td>
+                    <td th:text="${user.getLibrary()}"></td>
+                    <td th:text="${user.getAddress()}"></td>
+                    <td th:text="${user.getRole().getRoleName()}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
