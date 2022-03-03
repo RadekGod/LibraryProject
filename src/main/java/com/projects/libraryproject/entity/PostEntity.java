@@ -9,6 +9,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "POCZTY")
 public class PostEntity {
 

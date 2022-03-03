@@ -12,13 +12,14 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "BIBLIOTEKI")
 public class LibraryEntity {
 
     @Id
     @Column(name = "NR_BIBLIOTEKI")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long libraryId;
 
     @Column(name = "NR_TELEFONU")
     private String phoneNumber;
@@ -33,7 +34,7 @@ public class LibraryEntity {
     @Override
     public String toString() {
         return "LibraryEntity{" +
-                "id=" + id +
+                "id=" + libraryId +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", creationDate=" + creationDate +
                 ", address=" + address +
@@ -45,7 +46,7 @@ public class LibraryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LibraryEntity that = (LibraryEntity) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(libraryId, that.libraryId);
     }
 
     public LibraryEntity(String phoneNumber, Date creationDate) {
@@ -55,6 +56,6 @@ public class LibraryEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(libraryId);
     }
 }

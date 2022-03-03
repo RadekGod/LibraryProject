@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -41,7 +42,7 @@ public class UserEntity {
     @JoinColumn(name = "NR_ADRESU")
     private AddressEntity address;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "NR_ROLI")
     private RoleEntity role;
 

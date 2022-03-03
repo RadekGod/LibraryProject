@@ -9,6 +9,7 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "ROLE")
 @Entity
 public class RoleEntity {

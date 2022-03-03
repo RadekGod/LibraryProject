@@ -8,6 +8,33 @@
           crossorigin="anonymous">
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/books}">Biblioteka <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+    </div>
+</nav>
+
+
+<br>
+<br>
     <div class = "container">
         <div class = "row">
             <div class = "coL-lg-6 col-md-6 col-sm-6 container justify-content-center card">
@@ -15,6 +42,14 @@
                 <div class = "card-body">
                     <form th:action="@{/users}" th:object = "${user}" method = "post">
                         <div class = "form-group">
+
+                            <label>Rola:</label>
+                            <select th:field = "${user.role.roleName}" name = "roleName" required>
+                                <option th:value = "'USER'">Użytkownik</option>
+                                <option th:value = "'ADMIN'">Administrator</option>
+                            </select>
+                            <br>
+
                             <label>Imię</label>
                             <input type = "text" name = "firstName" th:field = "${user.firstName}" class = "form-control" placeholder = "Podaj imię" required>
 
@@ -26,6 +61,9 @@
 
                             <label>Hasło</label>
                             <input type = "password" name = "password" th:field = "${user.password}" class = "form-control" placeholder = "Podaj hasło" required>
+
+                            <label>Saldo</label>
+                            <input type = "number" name = "balance" th:value = "${user.balance}" class = "form-control" placeholder = "Podaj saldo konta" required>
 
                             <label>Miejscowość</label>
                             <input type = "text" name = "locality" th:field = "${user.address.locality}" class = "form-control" placeholder = "Podaj numer domu" required>

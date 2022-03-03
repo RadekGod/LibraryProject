@@ -4,17 +4,15 @@ package com.projects.libraryproject.service.Implementation;
 import com.projects.libraryproject.entity.*;
 import com.projects.libraryproject.repository.*;
 import com.projects.libraryproject.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImplementation {
+public class UserServiceImplementation implements UserService{
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
@@ -31,19 +29,27 @@ public class UserServiceImplementation {
         this.roleRepository = roleRepository;
     }
 
+    @Override
     public List<UserEntity> getAllUsers() {
-        System.out.println(postRepository.findPostEntityByZipCodeAndPostLocality("01-029", "Warszawa"));
-
         return userRepository.findAll();
     }
 
     @Transactional
+    @Override
     public UserEntity saveUser(UserEntity user) {
-        RoleEntity role = new RoleEntity(1L, "USER", "Standardowy użytkownik");
-        user.setBalance(0);
         user.setLibrary(libraryRepository.getById(1L));
         Optional<PostEntity> post = postRepository.findPostEntityByZipCodeAndPostLocality(user.getAddress().getPost().getZipCode(),
                 user.getAddress().getPost().getPostLocality());
+
+        Optional<RoleEntity> existingRole = roleRepository.getRoleEntityByRoleName(user.getRole().getRoleName());
+
+        if (existingRole.isPresent()) {
+            RoleEntity roleResult = existingRole.get();
+            user.setRole(roleRepository.save(roleResult));
+        } else {
+            roleRepository.save(user.getRole());
+        }
+
         if (post.isPresent()) {
             PostEntity postResult = post.get();
             postRepository.save(postResult);
@@ -52,8 +58,78 @@ public class UserServiceImplementation {
             postRepository.save(user.getAddress().getPost());
         }
 
-        addressRepository.save(user.getAddress());
-        user.setRole(roleRepository.save(role));
+        Optional<AddressEntity> existingAddress = addressRepository.getAddressEntityByLocalityAndStreetAndHouseNumberAndHouseUnitNumberAndPost(user.getAddress().getLocality(),
+                user.getAddress().getStreet(), user.getAddress().getHouseNumber(), user.getAddress().getHouseUnitNumber(), user.getAddress().getPost());
+
+        if (existingAddress.isPresent()) {
+            AddressEntity addressResult = existingAddress.get();
+            user.setAddress(addressRepository.save(addressResult));
+        } else {
+            addressRepository.save(user.getAddress());
+        }
+
         return userRepository.save(user);
+    }
+
+
+    @Override
+    @Transactional
+    public UserEntity updateUser(UserEntity user, AddressEntity address, PostEntity post, RoleEntity role) {
+        System.out.println("zedytowany" + user);
+        System.out.println("zedytowany" + address);
+        System.out.println("zedytowany" + post);
+        System.out.println("zedytowany" + role);
+
+
+
+
+        UserEntity existingUser = getUserById(user.getUserId());
+        //System.out.println(existingUser);
+        //existingUser.setFirstName(user.getFirstName());
+        //existingUser.setLastName(user.getLastName());
+        //existingUser.setPassword(user.getPassword());
+
+        //ustawienie placówki pocztowej w zależności od tego czy istnieje w bazie
+        Optional<RoleEntity> existingRole = roleRepository.getRoleEntityByRoleName(role.getRoleName());
+
+        if (existingRole.isPresent()) {
+            RoleEntity roleResult = existingRole.get();
+            user.setRole(roleRepository.save(roleResult));
+        } else {
+            user.setRole(roleRepository.save(role));
+        }
+
+        Optional<PostEntity> existingPost = postRepository.findPostEntityByZipCodeAndPostLocality(post.getZipCode(),
+                post.getPostLocality());
+
+        if (existingPost.isPresent()) {
+            PostEntity postResult = existingPost.get();
+            address.setPost(postRepository.save(postResult));
+        } else {
+            address.setPost(postRepository.save(post));
+        }
+
+        Optional<AddressEntity> existingAddress = addressRepository.getAddressEntityByLocalityAndStreetAndHouseNumberAndHouseUnitNumberAndPost(address.getLocality(),
+                address.getStreet(), address.getHouseNumber(), address.getHouseUnitNumber(), address.getPost());
+
+        if (existingAddress.isPresent()) {
+            AddressEntity addressResult = existingAddress.get();
+            user.setAddress(addressRepository.save(addressResult));
+        } else {
+            user.setAddress(addressRepository.save(address));
+        }
+
+        user.setLibrary(existingUser.getLibrary());
+        //existingUser.setAddress(addressRepository.save(user.getAddress()));
+        return userRepository.save(user);
+    }
+    @Override
+    public UserEntity getUserById(long id) {
+        return userRepository.findById(id).get();
+    }
+
+    @Override
+    public void deleteUserById(long id) {
+        userRepository.deleteById(id);
     }
 }

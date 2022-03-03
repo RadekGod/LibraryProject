@@ -1,5 +1,6 @@
 package com.projects.libraryproject;
 
+import com.projects.libraryproject.service.Implementation.UserServiceImplementation;
 import com.projects.libraryproject.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,11 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class LibraryProjectApplicationTests {
 
-    private final UserService userService;
+    private final UserServiceImplementation userServiceImplementation;
 
     @Autowired
-    LibraryProjectApplicationTests(UserService userService) {
-        this.userService = userService;
+    LibraryProjectApplicationTests(UserServiceImplementation userServiceImplementation) {
+        this.userServiceImplementation = userServiceImplementation;
     }
 
     @BeforeEach

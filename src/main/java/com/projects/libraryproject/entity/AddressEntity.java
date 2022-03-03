@@ -11,6 +11,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "ADRESY")
 public class AddressEntity {
 
@@ -23,13 +24,13 @@ public class AddressEntity {
     private String locality;
 
     @Column(name = "ULICA")
-    private String street;
+    private String  street;
 
     @Column(name = "NR_DOMU", nullable = false)
-    private int houseNumber;
+    private int  houseNumber;
 
     @Column(name = "NR_LOKALU")
-    private int houseUnitNumber;
+    private int  houseUnitNumber;
 
     @OneToOne
     @JoinColumn(name = "NR_POCZTY")
