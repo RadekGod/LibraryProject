@@ -10,7 +10,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <a class="navbar-brand" th:href="@{/books}">Biblioteka</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,7 +20,7 @@
                 <a class="nav-link" th:href="@{/books}">Biblioteka <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -54,7 +54,7 @@
                     <th>Biblioteka</th>
                     <th>Adres</th>
                     <th>Rola</th>
-                    <th>Actions</th>
+                    <th>Akcje</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +70,7 @@
                     <td th:text="${user.getRole().getRoleName()}"></td>
                     <td>
                         <a th:href = "@{/users/edit/{id}(id=${user.userId})}" class = "btn btn-primary">Update</a>
-                        <a th:href = "@{/users/{id}(id=${user.userId})}" class = "btn btn-danger">Delete</a>
+                        <a th:href = "@{/users/delete/{id}(id=${user.userId})}" class = "btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>

@@ -7,10 +7,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "UZYTKOWNICY")
 public class UserEntity {
 

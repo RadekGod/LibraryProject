@@ -21,7 +21,8 @@ public class UserServiceImplementation implements UserService{
     private final RoleRepository roleRepository;
 
     public UserServiceImplementation(UserRepository userRepository, AddressRepository addressRepository,
-                                     PostRepository postRepository, LibraryRepository libraryRepository, RoleRepository roleRepository) {
+                                     PostRepository postRepository, LibraryRepository libraryRepository,
+                                     RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.postRepository = postRepository;
@@ -84,10 +85,6 @@ public class UserServiceImplementation implements UserService{
 
 
         UserEntity existingUser = getUserById(user.getUserId());
-        //System.out.println(existingUser);
-        //existingUser.setFirstName(user.getFirstName());
-        //existingUser.setLastName(user.getLastName());
-        //existingUser.setPassword(user.getPassword());
 
         //ustawienie placówki pocztowej w zależności od tego czy istnieje w bazie
         Optional<RoleEntity> existingRole = roleRepository.getRoleEntityByRoleName(role.getRoleName());

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edytuj książkę</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" th:href="@{/books}">Biblioteka</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/books}">Książki <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>
+
+
+<br>
+<br>
+<div class = "container">
+  <div class = "row">
+    <div class = "coL-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+      <h1 class = "test-center">Edit Book</h1>
+      <div class = "card-body">
+        <form th:action="@{/books/{id} (id = ${book.bookId})}" method = "post">
+          <div class = "form-group">
+
+            <label>Tytuł</label>
+            <input type = "text" name = "title" th:value = "${book.title}" class = "form-control" placeholder = "Podaj tytuł" required>
+
+            <label>Imię autora</label>
+            <input type = "text" name = "firstName" th:value = "${author.firstName}" class = "form-control" placeholder = "Podaj imię" required>
+
+            <label>Nazwisko autora</label>
+            <input type = "text" name = "lastName" th:value = "${author.lastName}" class = "form-control" placeholder = "Podaj nazwisko" required>
+
+            <label>Gatunek</label>
+            <input type = "text" name = "typeName" th:value = "${type.typeName}" class = "form-control" placeholder = "Podaj gatunek" required>
+
+            <label>Data wydania</label>
+            <input type = "date" name = "releaseDate" th:value = "${book.releaseDate}" class = "form-control" placeholder = "Podaj datę wydania" required>
+
+            <label>ISBN</label>
+            <input type = "number" name = "ISBN" th:value = "${book.ISBN}" class = "form-control" placeholder = "Podaj ISBN" required>
+
+            <label>Liczba stron</label>
+            <input type = "Number" name = "pages" th:value = "${book.pages}" class = "form-control" placeholder = "Podaj liczbę stron" required>
+
+            <br>
+            <label>Typ okładki</label>
+            <select th:value = "${book.coverType}" name = "coverType" required>
+              <option th:value = "'Twarda'">Twarda</option>
+              <option th:value = "'Miekka'">Miękka</option>
+            </select>
+            <br>
+
+
+            <label>Opis</label>
+            <input type = "text" name = "description" th:value = "${book.description}" class = "form-control" placeholder = "Podaj opis książki">
+
+            <label>Wydawnictwo</label>
+            <input type = "text" name = "publisher" th:value = "${book.publisher}" class = "form-control" placeholder = "Podaj wydawnictwo" required>
+
+          </div>
+
+          <div class = "box-footer">
+            <button type = "submit" class = "btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

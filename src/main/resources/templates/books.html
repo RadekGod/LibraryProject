@@ -8,65 +8,68 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Biblioteka</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a th:href = "@{/users}">Users</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/books}">Biblioteka</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/books}">Biblioteka <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
     </div>
 </nav>
 
 
 <div class="container">
     <div class="row">
-        <h1> List Users</h1>
+        <h1> List Books</h1>
     </div>
     <div class="row">
         <div class="col-Lg-3">
-            <a th:href="@{/users/new}" class="btn btn-primary btn-sm mb-3">Dodaj książkę</a>
+            <a th:href="@{/books/new}" class="btn btn-primary btn-sm mb-3">Dodaj książkę</a>
         </div>
     </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
         <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>E-mail</th>
-            <th>Hasło</th>
-            <th>Saldo</th>
-            <th>Biblioteka</th>
-            <th>Adres</th>
-            <th>Rola</th>
-            <th>Actions</th>
+            <th>Id</th>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Gatunek</th>
+            <th>Data wydania</th>
+            <th>ISBN</th>
+            <th>Liczba Stron</th>
+            <th>Typ okładki</th>
+            <th>Akcje</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each = "book : ${books}">
-            <td th:text="${user.getFirstName()}"></td>
-            <td th:text="${user.getLastName()}"></td>
-            <td th:text="${user.getEmail()}"></td>
-            <td th:text="${user.getPassword()}"></td>
-            <td th:text="${user.getBalance()}"></td>
-            <td th:text="${user.getLibrary()}"></td>
-            <td th:text="${user.getAddress()}"></td>
-            <td th:text="${user.getRole().getRoleName()}"></td>
+            <td th:text="${book.getBookId()}">Id</td>
+            <td th:text="${book.getTitle()}">Tytuł</td>
+            <td><span th:each="author : ${book.getAuthors()}" th:text="' ' + ${author.getFirstName()} + ' ' + ${author.getLastName()} + ' '">Autor
+            </span>
+            </td>
+            <td><span th:each="type : ${book.getTypes()}" th:text="' ' + ${type.getTypeName()}">Gatunek</span></td>
+            <td th:text="${book.getReleaseDate()}">Data wydania</td>
+            <td th:text="${book.getISBN()}">ISBN</td>
+            <td th:text="${book.getPages()}">Liczba Stron</td>
+            <td th:text="${book.getCoverType()}">Typ okładki</td>
             <td>
-                <a th:href = "@{/users/edit/{id}(id=${user.userId})}" class = "btn btn-primary">Update</a>
-                <a th:href = "@{/users/{id}(id=${user.userId})}" class = "btn btn-danger">Delete</a>
+                <a th:href = "@{/books/edit/{id}(id=${book.bookId})}" class = "btn btn-primary">Update</a>
+                <a th:href = "@{/books/delete/{id}(id=${book.bookId})}" class = "btn btn-danger">Delete</a>
             </td>
         </tr>
         </tbody>

@@ -50,7 +50,6 @@ public class UserController {
         return "edit_user";
     }
 
-    //dwie dolne metody do ogarnięcia również w kontrolerze, htmle też do przerobienia
 
     @PostMapping("/{id}")
     public String updateUser(@PathVariable long id, @ModelAttribute("user") UserEntity user,
@@ -62,7 +61,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable long id) {
         userServiceImplementation.deleteUserById(id);
         return "redirect:/users";
