@@ -31,6 +31,9 @@ public class UserEntity {
     @Column(name = "HASLO", nullable = false)
     private String  password;
 
+    @Column(name = "AKTYWNY", nullable = false)
+    private boolean active;
+
     @Column(name = "SALDO", nullable = false)
     private Integer balance;
 
@@ -54,6 +57,7 @@ public class UserEntity {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", active=" + active +
                 ", balance=" + balance +
                 ", library=" + library +
                 ", address=" + address +

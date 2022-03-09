@@ -6,8 +6,6 @@ import com.projects.libraryproject.entity.LibraryEntity;
 import com.projects.libraryproject.entity.TypeEntity;
 import lombok.Data;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Data

@@ -9,17 +9,17 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/books}">Biblioteka</a>
+    <a class="navbar-brand" th:href="@{/user/books}">Biblioteka</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/books}">Biblioteka <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/user/books}">Biblioteka <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+                <a class="nav-link" th:href="@{/user/users}">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -63,7 +63,7 @@
             <td th:text="${book.getPages()}">Liczba Stron</td>
             <td th:text="${book.getCoverType()}">Typ okładki</td>
             <td>
-                <a th:href = "@{/books/edit/{id}(id=${book.bookId})}" class = "btn btn-primary">Dodaj do koszyka</a>
+                <a th:href = "@{/user/books/edit/{id}(id=${book.bookId})}" class = "btn btn-primary">Dodaj do koszyka</a>
             </td>
         </tr>
         </tbody>

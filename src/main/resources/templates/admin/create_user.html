@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Użytkownicy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/admin/books}">Biblioteka</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/admin/books}">Biblioteka <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/users}">Użytkownicy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+    </div>
+</nav>
+
+
+<br>
+<br>
+    <div class = "container">
+        <div class = "row">
+            <div class = "coL-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class = "test-center">Create new User</h1>
+                <div class = "card-body">
+                    <form th:action="@{/admin/users}" th:object = "${user}" method = "post">
+                        <div class = "form-group">
+
+                            <label>Rola:</label>
+                            <select th:field = "${user.role.roleName}" name = "roleName" required>
+                                <option th:value = "'USER'">Użytkownik</option>
+                                <option th:value = "'ADMIN'">Administrator</option>
+                            </select>
+                            <br>
+
+                            <label>Imię</label>
+                            <input type = "text" name = "firstName" th:field = "${user.firstName}" class = "form-control" placeholder = "Podaj imię" required>
+
+                            <label>Nazwisko</label>
+                            <input type = "text" name = "lastName" th:field = "${user.lastName}" class = "form-control" placeholder = "Podaj nazwisko" required>
+
+                            <label>E-mail</label>
+                            <input type = "text" name = "email" th:field = "${user.email}" class = "form-control" placeholder = "Podaj e-mail" required>
+
+                            <label>Hasło</label>
+                            <input type = "password" name = "password" th:field = "${user.password}" class = "form-control" placeholder = "Podaj hasło" required>
+
+                            <label>Saldo</label>
+                            <input type = "number" name = "balance" th:value = "${user.balance}" class = "form-control" placeholder = "Podaj saldo konta" required>
+
+                            <label>Miejscowość</label>
+                            <input type = "text" name = "locality" th:field = "${user.address.locality}" class = "form-control" placeholder = "Podaj numer domu" required>
+
+                            <label>Ulica</label>
+                            <input type = "text" name = "street" th:field = "${user.address.street}" class = "form-control" placeholder = "Podaj nazwę ulicy">
+
+                            <label>Numer domu</label>
+                            <input type = "Number" name = "houseNumber" th:field = "${user.address.houseNumber}" class = "form-control" placeholder = "Podaj numer domu" required>
+
+                            <label>Numer lokalu</label>
+                            <input type = "Number" name = "houseUnitNumber" th:field = "${user.address.houseUnitNumber}" class = "form-control" placeholder = "Podaj numer lokalu">
+
+                            <label>Kod pocztowy</label>
+                            <input type = "text" name = "zipCode" th:field = "${user.address.post.zipCode}" class = "form-control" placeholder = "Podaj kod pocztowy" required>
+
+                            <label>Placówka pocztowa</label>
+                            <input type = "text" name = "postLocality" th:field = "${user.address.post.postLocality}" class = "form-control" placeholder = "Podaj miejscowość poczty" required>
+                        </div>
+
+                        <div class = "box-footer">
+                            <button type = "submit" class = "btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

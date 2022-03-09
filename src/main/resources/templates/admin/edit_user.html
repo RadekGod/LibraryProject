@@ -10,17 +10,17 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/books}">Biblioteka</a>
+    <a class="navbar-brand" th:href="@{/admin/books}">Biblioteka</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/books}">Biblioteka <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/admin/books}">Biblioteka <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+                <a class="nav-link" th:href="@{/admin/users}">Użytkownicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -37,7 +37,7 @@
         <div class = "coL-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class = "test-center">Update User</h1>
             <div class = "card-body">
-                <form th:action="@{/users/{id} (id = ${user.userId})}" method = "post">
+                <form th:action="@{/admin/users/{id} (id = ${user.userId})}" method = "post">
                     <div class = "form-group">
 
                         <label>Rola:</label>
